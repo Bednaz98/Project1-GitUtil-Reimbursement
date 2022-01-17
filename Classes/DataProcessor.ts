@@ -31,7 +31,7 @@ export default class DataProcessor{
     }
 
     /**Return an array if for request that are connected to the given ID. This works for both employees and managers*/
-    FilterRequestByID( ID,RequestArray:Request[]):Request[]{
+    FilterRequestByID( ID:string,RequestArray:Request[]):Request[]{
         const TempIDArray:Request[] =[];
         for(let i = 0; i < RequestArray.length; i++){
             const TempDestructID = this.ExtractRequestIDs(RequestArray[i].id)

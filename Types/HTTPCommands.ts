@@ -4,7 +4,7 @@ import {HTTPCreateProfile, Profile, Request} from './Entity';
 import {RequestStatus} from './Enums';
 
 export interface LogHTTPCInterface{
-    Login(UserID:string):Promise<LoginReturn>
+    Login(UserID:string, password:string):Promise<LoginReturn>
     CheckCreds(UserID:string, Authentication:string):boolean
     LogOut(UserID:string, Authentication:string):Promise<ResultReturnCheck>
 }

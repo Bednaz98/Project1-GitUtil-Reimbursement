@@ -16,7 +16,7 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
     private TargetURL: string;
     private AuthenticationString:string ='';
     private UserID:string = '';
-    constructor(InputURL:string = 'http://localhost', InputPortNumber:number = 3000){
+    constructor(InputURL:string = 'http://localhost', InputPortNumber:number = 3001){
         this.PortNumber = InputPortNumber;
         this.TargetURL = InputURL
     }
@@ -82,9 +82,9 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
         return false ;
     }
     /**Attempts to login the user*/ 
-    async Login(UserID:string):Promise<LoginReturn> {
+    async Login(UserID:string, password:string):Promise<LoginReturn> {
         const Command:HTTPCommands=  HTTPCommands.Login ;
-        const body:any = {} ; 
+        const body:any = {password} ; 
         const JsonBody = (await this.CreateHTTPRequest(Command,body, UserID)).data;
         const LoginResult:LoginReturn = JsonBody;
         this.UserID = LoginResult.ReturnProfile?.id ?? '';
