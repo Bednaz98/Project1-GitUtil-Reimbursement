@@ -33,6 +33,7 @@ export interface TransferRequestArray{
 
 export interface LoginReturn{
     ReturnProfile:Profile
+    password:string
     AuthenticationString:string
 }
 

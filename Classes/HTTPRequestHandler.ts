@@ -16,9 +16,9 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
     private TargetURL: string;
     private AuthenticationString:string ='';
     private UserID:string = '';
-    constructor(InputURL:string = 'http://localhost', InputPortNumber:number = 3001){
-        this.PortNumber = InputPortNumber;
-        this.TargetURL = InputURL
+    constructor(InputURL:string, InputPortNumber:number=3001){
+        this.PortNumber = InputPortNumber ?? 3001 ;
+        this.TargetURL =  InputURL ??  'http://localhost'
     }
     // Internal Commands ===============================================
     private GetRoute(Command:HTTPCommands, ID:string){
@@ -84,7 +84,7 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
     /**Attempts to login the user*/ 
     async Login(UserID:string, password:string):Promise<LoginReturn> {
         const Command:HTTPCommands=  HTTPCommands.Login ;
-        const body:any = {password} ; 
+        const body:any = {UserID, password, AuthenticationString:''} ; 
         const JsonBody = (await this.CreateHTTPRequest(Command,body, UserID)).data;
         const LoginResult:LoginReturn = JsonBody;
         this.UserID = LoginResult.ReturnProfile?.id ?? '';
