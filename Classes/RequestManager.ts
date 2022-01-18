@@ -44,7 +44,7 @@ export default class SingleRequest {
     }
 
     public SetModifyDate(NewDate:number){
-        if( NewDate >   Math.round(Date.now() / 1000)  ){this.SRequest.ModifiedDate = NewDate}
+        if( NewDate >   Date.now()){this.SRequest.ModifiedDate = NewDate}
         else { this.SRequest.ModifiedDate = Date.now() }
     }
 
