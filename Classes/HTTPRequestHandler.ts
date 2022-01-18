@@ -87,7 +87,7 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
         const body:any = {UserID, password, AuthenticationString:''} ; 
         const JsonBody = (await this.CreateHTTPRequest(Command,body, UserID)).data;
         const LoginResult:LoginReturn = JsonBody;
-        this.UserID = LoginResult.ReturnProfile?.id ?? '';
+        this.UserID = LoginResult.ReturnProfile?.id ?? 'NullLogin';
         this.AuthenticationString = LoginResult.AuthenticationString ?? '';
         return LoginResult;
         
