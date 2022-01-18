@@ -24,5 +24,5 @@ export interface HTTPCreateProfile{
     FirstName:string
     LastName:string
     Password:string
-    Username:string
+    id:string
 }
