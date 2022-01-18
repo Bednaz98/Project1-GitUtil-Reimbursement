@@ -24,6 +24,5 @@ export interface HTTPCreateProfile{
     FirstName:string
     LastName:string
     Password:string
-    ManagerID:string
-    EmployeeArray:string[]
+    Username:string
 }
