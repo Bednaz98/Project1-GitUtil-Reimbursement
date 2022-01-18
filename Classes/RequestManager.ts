@@ -36,16 +36,16 @@ export default class SingleRequest {
     }
 
     public GetPostDate():number{
-        return this.SRequest?.PostDate || Math.round(Date.now() / 1000);
+        return this.SRequest?.PostDate || Date.now() ;
     }
 
     public GetModifyDate():number{
-        return this.SRequest?.ModifiedDate || Math.round(Date.now() / 1000);
+        return this.SRequest?.ModifiedDate || Date.now() ;
     }
 
     public SetModifyDate(NewDate:number){
         if( NewDate >   Math.round(Date.now() / 1000)  ){this.SRequest.ModifiedDate = NewDate}
-        else { this.SRequest.ModifiedDate = Math.round(Date.now() / 1000)}
+        else { this.SRequest.ModifiedDate = Date.now() }
     }
 
     public GetFile():any{
