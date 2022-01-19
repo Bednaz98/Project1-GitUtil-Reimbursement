@@ -116,7 +116,7 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
         throw new Error("Method not implemented.");
     }
     // Manager functions==================================================================
-    async ManagerChangeRequest(ManagerID:string, RequestID:string, Type:number):Promise<TransferRequest> {
+    async ManagerChangeRequest(ManagerID:string, RequestID:string, Type:RequestStatus):Promise<TransferRequest> {
         const Command:HTTPCommands=  HTTPCommands.ManageChangeRequest;
         let body:ResultReturnMarkRequest ;
         switch(Type){
