@@ -18,7 +18,8 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
     private UserID:string = '';
     constructor(InputURL:string, InputPortNumber:number=3001){
         this.PortNumber = InputPortNumber ?? 3001 ;
-        this.TargetURL =  InputURL ??  'http://localhost'
+        if(InputURL.length>1) {this.TargetURL =  InputURL}
+        else{this.TargetURL = 'http://localhost'}
     }
     // Internal Commands ===============================================
     private GetRoute(Command:HTTPCommands, ID:string){
