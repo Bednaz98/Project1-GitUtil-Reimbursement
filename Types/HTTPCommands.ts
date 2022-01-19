@@ -1,5 +1,5 @@
 
-import { LoginReturn, ResultReturnCheck, ResultReturnString, TransferProfile, TransferProfileArray, TransferRequest, TransferRequestArray } from './dto';
+import { LoginReturn, ResultReturnCheck, ResultReturnString, TransferProfile, TransferProfileArray, TransferRecords, TransferRequest, TransferRequestArray } from './dto';
 import {HTTPCreateProfile, Profile, Request} from './Entity';
 import {RequestStatus} from './Enums';
 
@@ -39,6 +39,7 @@ export interface ManagerHTTPCLInterface{
     /**used when a manager changes the request status*/
     ManagerChangeRequest(ManagerID:string, RequestID:string,Type:RequestStatus, Message:string ):Promise<TransferRequest>
     ManagerGetAllRequest(ManagerID:string):Promise<TransferRequestArray>
+    ManagerGetRecords():Promise<TransferRecords>
 }
 
 export interface AdminHTTPCLInterface{

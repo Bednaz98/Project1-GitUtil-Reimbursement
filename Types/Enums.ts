@@ -24,7 +24,8 @@ export enum HTTPCommands{
     AdminGetAllEmployees,
     AdminAssignManager,
     AdminRemoveEmployee,
-    AdminDeleteProfile
+    AdminDeleteProfile,
+    GetRecords
 }
 
 // used for indicating switch codes for communicating over http

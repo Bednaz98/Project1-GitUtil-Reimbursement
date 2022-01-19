@@ -51,3 +51,7 @@ export interface MakeRequestForm{
     Message:string
     AuthenticationString:string
 }
+
+export interface TransferRecords{
+    ReturnRecords:string[]
+}

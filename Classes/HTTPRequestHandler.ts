@@ -2,7 +2,7 @@ import { HTTPCommands, RequestStatus } from "../Types/Enums";
 import  Axios, { AxiosResponse }  from "axios";
 import { AdminHTTPCLInterface, LogHTTPCInterface, ManagerHTTPCLInterface, ProfileHTTPCInterface } from "../Types/HTTPCommands";
 import { HTTPCreateProfile, Profile, Request } from "../Types/Entity";
-import { LoginReturn, MakeRequestForm, ResultReturnCheck, ResultReturnMarkRequest, ResultReturnString, TransferProfile, TransferProfileArray, TransferRequest, TransferRequestArray } from "../Types/dto";
+import { LoginReturn, MakeRequestForm, ResultReturnCheck, ResultReturnMarkRequest, ResultReturnString, TransferProfile, TransferProfileArray, TransferRecords, TransferRequest, TransferRequestArray } from "../Types/dto";
 import {ResultReturnStringID} from '../Types/dto';
 
 
@@ -64,6 +64,7 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
             case HTTPCommands.AdminAssignManager:   { return await Axios.patch  (this.CreateURL(Command,ID), body);}
             case HTTPCommands.AdminRemoveEmployee:  { return await Axios.patch  (this.CreateURL(Command,ID), body);}
             case HTTPCommands.AdminDeleteProfile:   { return await Axios.delete (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.GetRecords:           { return await Axios.get    (this.CreateURL(Command,ID), body);}
             default:                                { return await Axios.get    (this.CreateURL(5000,ID), body);}
         }
     }
@@ -132,6 +133,12 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
         const body ={}
         let ResultReturnRequest:TransferRequestArray= (await this.CreateHTTPRequest(Command, body, `${this.UserID}/${this.AuthenticationString}`)).data;
         return ResultReturnRequest
+    }
+    async ManagerGetRecords(): Promise<TransferRecords> {
+        const Command:HTTPCommands=  HTTPCommands.GetRecords ;
+        const body={};
+        const ReturnRecord:TransferRecords= (await this.CreateHTTPRequest(Command, body, this.UserID)).data;
+        return ReturnRecord;
     }
     /**Used to initialize a new account and also login the user*/
     async CreateProfile(ProfileInit:HTTPCreateProfile):Promise<LoginReturn> {
