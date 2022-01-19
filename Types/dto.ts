@@ -20,6 +20,7 @@ export interface ResultReturnStringID{
 export interface ResultReturnMarkRequest{
     ReturnString:string
     Type:RequestStatus
+    Message:string
     AuthenticationString:string
 }
 
@@ -47,6 +48,6 @@ export interface TransferProfileArray{
 
 export interface MakeRequestForm{
     Amount:number
-    file?:any
+    Message:string
     AuthenticationString:string
 }

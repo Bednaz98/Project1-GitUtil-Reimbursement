@@ -9,8 +9,11 @@ export default class RequestBuilder{
         this.BuildRequest = TempRequestMan.DeconstructObject();
         this.BuildRequest.id = `${ManagerID}~${EmployeeID}~${v4()}`
     }
-    public AttachMessage(InputFile:any){
-        this.BuildRequest.File=InputFile;
+    public AttachInputMessage(Message:string){
+        this.BuildRequest.InputMessage =Message;
+    }
+    public AttachManagerMessage(Message:string){
+        this.BuildRequest.ManagerMessage =Message;
     }
     public DeconstructRequest():Request{
         return this.BuildRequest;

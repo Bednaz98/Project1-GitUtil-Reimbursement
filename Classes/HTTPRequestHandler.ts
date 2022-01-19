@@ -116,13 +116,13 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
         throw new Error("Method not implemented.");
     }
     // Manager functions==================================================================
-    async ManagerChangeRequest(ManagerID:string, RequestID:string, Type:RequestStatus):Promise<TransferRequest> {
+    async ManagerChangeRequest(ManagerID:string, RequestID:string, Type:RequestStatus, Message:string):Promise<TransferRequest> {
         const Command:HTTPCommands=  HTTPCommands.ManageChangeRequest;
         let body:ResultReturnMarkRequest ;
         switch(Type){
-            case RequestStatus.Denied:    { body= { ReturnString:RequestID, Type:RequestStatus.Denied, AuthenticationString: (this.AuthenticationString)}; break }
-            case RequestStatus.Approved:    {body= { ReturnString:RequestID, Type:RequestStatus.Approved, AuthenticationString: (this.AuthenticationString)}; break }
-            default:   {  body= { ReturnString:RequestID, Type:RequestStatus.Pending, AuthenticationString: (this.AuthenticationString)} ; break }
+            case RequestStatus.Denied:    { body= { ReturnString:RequestID, Type:RequestStatus.Denied, AuthenticationString: (this.AuthenticationString),Message}; break }
+            case RequestStatus.Approved:    {body= { ReturnString:RequestID, Type:RequestStatus.Approved, AuthenticationString: (this.AuthenticationString),Message}; break }
+            default:   {  body= { ReturnString:RequestID, Type:RequestStatus.Pending, AuthenticationString: (this.AuthenticationString),Message} ; break }
         }
         const ResultReturnRequest:TransferRequest = (await this.CreateHTTPRequest(Command, body, this.UserID)).data;
         return ResultReturnRequest;
@@ -171,9 +171,9 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
         const ResultReturnString:ResultReturnString = (await this.CreateHTTPRequest(Command, body, this.UserID)).data;
         return ResultReturnString;
     }
-    async MakeRequest(EmployeeID:string, Amount:number, file?:any):Promise<TransferRequest> {
+    async MakeRequest(EmployeeID:string, Amount:number, Message:string):Promise<TransferRequest> {
         const Command:HTTPCommands=  HTTPCommands.MakeRequest ;
-        const body:MakeRequestForm = {Amount, file, AuthenticationString: (this.AuthenticationString)}
+        const body:MakeRequestForm = {Amount, Message, AuthenticationString: (this.AuthenticationString)}
         const ResultReturnRequest:TransferRequest = (await this.CreateHTTPRequest(Command, body, this.UserID)).data;
         return ResultReturnRequest;
     }/**use to mark a request s deleted*/

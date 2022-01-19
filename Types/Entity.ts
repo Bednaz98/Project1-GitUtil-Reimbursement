@@ -17,7 +17,9 @@ export interface Request{
     RequestStatus:RequestStatus
     PostDate:number
     ModifiedDate?:number
-    File?:any
+    InputMessage?:string
+    ManagerMessage?:string
+
 }
 
 export interface HTTPCreateProfile{

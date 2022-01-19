@@ -14,7 +14,8 @@ export default class SingleRequest {
             RequestStatus: this.GetStatus(),
             PostDate: this.GetPostDate(),
             ModifiedDate: this.GetModifyDate(),
-            File: this.GetFile()
+            InputMessage: this. GetInputMessage(),
+            ManagerMessage: this.GetManagerMessage()
             }
     }
 
@@ -48,8 +49,11 @@ export default class SingleRequest {
         else { this.SRequest.ModifiedDate = Date.now() }
     }
 
-    public GetFile():any{
-        return this.SRequest?.File
+    public GetInputMessage():string{
+        return this.SRequest?.InputMessage ?? ''
+    }
+    public GetManagerMessage():string{
+        return this.SRequest?.ManagerMessage ?? ''
     }
 
     public GetStatus(){ return this.SRequest?.RequestStatus || 0; }

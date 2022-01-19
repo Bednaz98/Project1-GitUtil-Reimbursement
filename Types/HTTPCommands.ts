@@ -26,7 +26,7 @@ export interface ProfileHTTPCInterface {
     GetManagerName(ManagerID:string):Promise<ResultReturnString>
 
     /**Used to make a request on the server*/
-    MakeRequest(EmployeeID:string, Amount:number, file:any):Promise<TransferRequest>
+    MakeRequest(EmployeeID:string, Amount:number, Message:string):Promise<TransferRequest>
 
     /**Used by the client to mark a request as deleted*/ 
     DeleteRequest(EmployeeID:string, RequestID:string):Promise<ResultReturnCheck>
@@ -37,7 +37,7 @@ export interface ProfileHTTPCInterface {
 
 export interface ManagerHTTPCLInterface{
     /**used when a manager changes the request status*/
-    ManagerChangeRequest(ManagerID:string, RequestID:string,Type:RequestStatus ):Promise<TransferRequest>
+    ManagerChangeRequest(ManagerID:string, RequestID:string,Type:RequestStatus, Message:string ):Promise<TransferRequest>
     ManagerGetAllRequest(ManagerID:string):Promise<TransferRequestArray>
 }
 
