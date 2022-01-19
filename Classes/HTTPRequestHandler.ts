@@ -39,6 +39,7 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
             case HTTPCommands.AdminAssignManager:   { return `/Admin/${ID}/Assign`;}
             case HTTPCommands.AdminRemoveEmployee:  { return `/Admin/${ID}/UnAssign`;}
             case HTTPCommands.AdminDeleteProfile:   { return `/Admin/${ID}`;}
+            case HTTPCommands.GetRecords:           { return `/Records`;}
             default:                                { return `/Connect`;}
         }
     }
