@@ -81,7 +81,6 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
     // Helper Functions==========================================
     /**Used tp check the connection to the server*/
     async CheckConnection():Promise<boolean>{
-        const InputURL:string = `${this.TargetURL}:${this.PortNumber}/Connect`;
         try {
             const ReturnStuff = await Axios.get( `${this.constructURLPrefect()}/Connect`);
             if(   ReturnStuff.status <300  ){ return true};
