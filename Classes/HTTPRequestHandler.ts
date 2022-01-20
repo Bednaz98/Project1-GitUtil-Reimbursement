@@ -16,8 +16,10 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
     private TargetURL: string;
     private AuthenticationString:string ='';
     private UserID:string = '';
-    constructor(InputURL:string, InputPortNumber:number=3001){
+    private UsePort:boolean;
+    constructor(InputURL:string, InitUsePort:boolean,InputPortNumber:number=3001){
         this.PortNumber = InputPortNumber ?? 3001 ;
+        this.UsePort=InitUsePort;
         if(InputURL?.length>1) {this.TargetURL =  InputURL}
         else{this.TargetURL = 'http://localhost'}
     }
@@ -45,7 +47,8 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
         }
     }
     private CreateURL(Command:HTTPCommands,ID:string):string{
-        return `${this.TargetURL}:${this.PortNumber}${this.GetRoute(Command,ID)}`
+        if(this.UsePort){   return `${this.TargetURL}:${this.PortNumber}${this.GetRoute(Command,ID)}`}
+        else{               return `${this.TargetURL}${this.GetRoute(Command,ID)}`}
     }
     //===================================================================
     private async CreateHTTPRequest(Command:HTTPCommands, body:any, ID:string):Promise<AxiosResponse<any, any>>{
