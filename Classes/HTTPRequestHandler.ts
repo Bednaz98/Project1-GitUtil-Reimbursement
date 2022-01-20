@@ -46,9 +46,12 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
             default:                                { return `/Connect`;}
         }
     }
+    private constructURLPrefect(){
+        if(this.UsePort){ return `${this.TargetURL}:${this.PortNumber}`}
+        else{ return `${this.TargetURL}`}
+    }
     private CreateURL(Command:HTTPCommands,ID:string):string{
-        if(this.UsePort){   return `${this.TargetURL}:${this.PortNumber}${this.GetRoute(Command,ID)}`}
-        else{               return `${this.TargetURL}${this.GetRoute(Command,ID)}`}
+        return `${this.constructURLPrefect()}${this.GetRoute(Command,ID)}`;
     }
     //===================================================================
     private async CreateHTTPRequest(Command:HTTPCommands, body:any, ID:string):Promise<AxiosResponse<any, any>>{
@@ -70,7 +73,7 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
             case HTTPCommands.AdminRemoveEmployee:  { return await Axios.patch  (this.CreateURL(Command,ID), body);}
             case HTTPCommands.AdminDeleteProfile:   { return await Axios.delete (this.CreateURL(Command,ID), body);}
             case HTTPCommands.GetRecords:           { return await Axios.get    (this.CreateURL(Command,ID), body);}
-            default:                                { return await Axios.get    (this.CreateURL(5000,ID), body);}
+            default:                                { return await Axios.get    (this.CreateURL(5000,ID), body)   ;}
         }
     }
 
