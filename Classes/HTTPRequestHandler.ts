@@ -26,24 +26,26 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
     // Internal Commands ===============================================
     private GetRoute(Command:HTTPCommands, ID:string){
         switch(Command){
-            case HTTPCommands.CreateProfile:        { return `/Create`;}
-            case HTTPCommands.Login:                { return `/Login/${ID}`;}
-            case HTTPCommands.LogOut:               { return `/LogOut/${ID}`;}
-            case HTTPCommands.ChangeFirstName:      { return `/Profile/${ID}/ChangeFirst`;}
-            case HTTPCommands.ChangeLastName:       { return `/Profile/${ID}/ChangeLast`;}
-            case HTTPCommands.ChangePassword:       { return `/Profile/${ID}/ChangePassword`;}
-            case HTTPCommands.GetManageName:        { return `/Profile/${ID}/Manager`;}
-            case HTTPCommands.MakeRequest:          { return `/Request/${ID}`;}
-            case HTTPCommands.DeleteRequest:        { return `/Request/${ID}`;}
-            case HTTPCommands.GetAllSentRequest:    { return `/Request/${ID}`;}
-            case HTTPCommands.ManageChangeRequest:  { return `/Manager/${ID}`;}
-            case HTTPCommands.ManagerGetAllRequest: { return `/Manager/${ID}`;}
-            case HTTPCommands.AdminGetAllEmployees: { return `/Admin/${ID}`;}
-            case HTTPCommands.AdminAssignManager:   { return `/Admin/${ID}/Assign`;}
-            case HTTPCommands.AdminRemoveEmployee:  { return `/Admin/${ID}/UnAssign`;}
-            case HTTPCommands.AdminDeleteProfile:   { return `/Admin/${ID}`;}
-            case HTTPCommands.GetRecords:           { return `/Records`;}
-            default:                                { return `/Connect`;}
+            case HTTPCommands.CreateProfile:            { return `/Create`;}
+            case HTTPCommands.Login:                    { return `/Login/${ID}`;}
+            case HTTPCommands.LogOut:                   { return `/LogOut/${ID}`;}
+            case HTTPCommands.ChangeFirstName:          { return `/Profile/${ID}/ChangeFirst`;}
+            case HTTPCommands.ChangeLastName:           { return `/Profile/${ID}/ChangeLast`;}
+            case HTTPCommands.ChangePassword:           { return `/Profile/${ID}/ChangePassword`;}
+            case HTTPCommands.GetManageName:            { return `/Profile/${ID}/Manager`;}
+            case HTTPCommands.MakeRequest:              { return `/Request/${ID}`;}
+            case HTTPCommands.DeleteRequest:            { return `/Request/${ID}`;}
+            case HTTPCommands.GetAllSentRequest:        { return `/Request/${ID}`;}
+            case HTTPCommands.ManageChangeRequest:      { return `/Manager/${ID}`;}
+            case HTTPCommands.ManagerGetAllRequest:     { return `/Manager/${ID}`;}
+            case HTTPCommands.AdminGetAllEmployees:     { return `/Admin/${ID}`;}
+            case HTTPCommands.AdminAssignManager:       { return `/Admin/${ID}/Assign`;}
+            case HTTPCommands.AdminRemoveEmployee:      { return `/Admin/${ID}/UnAssign`;}
+            case HTTPCommands.AdminDeleteProfile:       { return `/Admin/${ID}`;}
+            case HTTPCommands.GetRecords:               { return `/Records`;}
+            case HTTPCommands.CheckAdminPermissions:    { return `/CheckAdminPermission/${ID}`;}
+            case HTTPCommands.CheckManagerPermissions:  { return `/CheckManagerPermission/${ID}`;}
+            default:                                    { return `/Connect`;}
         }
     }
     private constructURLPrefect(){
@@ -56,24 +58,26 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
     //===================================================================
     private async CreateHTTPRequest(Command:HTTPCommands, body:any, ID:string):Promise<AxiosResponse<any, any>>{
         switch(Command){
-            case HTTPCommands.CreateProfile:        { return await Axios.post   (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.Login:                { return await Axios.post   (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.LogOut:               { return await Axios.patch  (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.ChangeFirstName:      { return await Axios.patch  (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.ChangeLastName:       { return await Axios.patch  (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.ChangePassword:       { return await Axios.patch  (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.GetManageName:        { return await Axios.get    (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.MakeRequest:          { return await Axios.post   (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.DeleteRequest:        { return await Axios.delete (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.GetAllSentRequest:    { return await Axios.get    (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.ManageChangeRequest:  { return await Axios.patch  (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.ManagerGetAllRequest: { return await Axios.get    (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.AdminGetAllEmployees: { return await Axios.get    (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.AdminAssignManager:   { return await Axios.patch  (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.AdminRemoveEmployee:  { return await Axios.patch  (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.AdminDeleteProfile:   { return await Axios.delete (this.CreateURL(Command,ID), body);}
-            case HTTPCommands.GetRecords:           { return await Axios.get    (this.CreateURL(Command,ID), body);}
-            default:                                { return await Axios.get    (this.CreateURL(5000,ID), body)   ;}
+            case HTTPCommands.CreateProfile:            { return await Axios.post   (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.Login:                    { return await Axios.post   (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.LogOut:                   { return await Axios.patch  (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.ChangeFirstName:          { return await Axios.patch  (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.ChangeLastName:           { return await Axios.patch  (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.ChangePassword:           { return await Axios.patch  (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.GetManageName:            { return await Axios.get    (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.MakeRequest:              { return await Axios.post   (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.DeleteRequest:            { return await Axios.delete (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.GetAllSentRequest:        { return await Axios.get    (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.ManageChangeRequest:      { return await Axios.patch  (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.ManagerGetAllRequest:     { return await Axios.get    (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.AdminGetAllEmployees:     { return await Axios.get    (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.AdminAssignManager:       { return await Axios.patch  (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.AdminRemoveEmployee:      { return await Axios.patch  (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.AdminDeleteProfile:       { return await Axios.delete (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.GetRecords:               { return await Axios.get    (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.CheckManagerPermissions:  { return await Axios.get    (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.CheckAdminPermissions:    { return await Axios.get    (this.CreateURL(Command,ID), body);}
+            default:                                    { return await Axios.get    (this.CreateURL(5000,ID), body)   ;}
         }
     }
 
@@ -108,6 +112,29 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
         return JsonBody;
     }
 
+    async CheckManagerPermissions(): Promise<ResultReturnCheck> {
+        const Command:HTTPCommands=  HTTPCommands.CheckManagerPermissions
+        let body = {}
+        let result:ResultReturnCheck;
+        try {
+            result = (await this.CreateHTTPRequest(Command, body, this.UserID)).data
+        } catch (error) {
+            result = {ResultCheck:false}
+        }
+        return result
+    }
+    async CheckAdminPermissions(): Promise<ResultReturnCheck> {
+        const Command:HTTPCommands=  HTTPCommands.CheckAdminPermissions
+        let body = {}
+        let result:ResultReturnCheck;
+        try {
+            result = (await this.CreateHTTPRequest(Command, body, this.UserID)).data
+        } catch (error) {
+            result = {ResultCheck:false}
+        }
+        return result
+    }
+    
     async AdminGetAllEmployees():Promise<TransferProfileArray>{
         throw new Error("Method not implemented.");
     }
