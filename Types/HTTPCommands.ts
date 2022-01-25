@@ -40,8 +40,8 @@ export interface ManagerHTTPCLInterface{
     ManagerChangeRequest(ManagerID:string, RequestID:string,Type:RequestStatus, Message:string ):Promise<TransferRequest>
     ManagerGetAllRequest(ManagerID:string):Promise<TransferRequestArray>
     ManagerGetRecords():Promise<TransferRecords>
-    CheckManagerPermissions():Promise<ResultReturnCheck>
-    CheckAdminPermissions():Promise<ResultReturnCheck>
+    CheckManagerPermissions(ID:string):Promise<ResultReturnCheck>
+    CheckAdminPermissions(ID:string):Promise<ResultReturnCheck>
 }
 
 export interface AdminHTTPCLInterface{
