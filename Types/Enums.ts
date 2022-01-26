@@ -21,6 +21,7 @@ export enum HTTPCommands{
     GetAllSentRequest,
     ManageChangeRequest,
     ManagerGetAllRequest,
+    AdminCreateProfile,
     AdminGetAllEmployees,
     AdminAssignManager,
     AdminRemoveEmployee,

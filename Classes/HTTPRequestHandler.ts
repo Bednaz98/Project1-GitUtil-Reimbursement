@@ -38,6 +38,7 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
             case HTTPCommands.GetAllSentRequest:        { return `/Request/${ID}`;}
             case HTTPCommands.ManageChangeRequest:      { return `/Manager/${ID}`;}
             case HTTPCommands.ManagerGetAllRequest:     { return `/Manager/${ID}`;}
+            case HTTPCommands.AdminCreateProfile:       { return `/AdminCreate`;}
             case HTTPCommands.AdminGetAllEmployees:     { return `/Admin/${ID}`;}
             case HTTPCommands.AdminAssignManager:       { return `/Admin/${ID}/Assign`;}
             case HTTPCommands.AdminRemoveEmployee:      { return `/Admin/${ID}/UnAssign`;}
@@ -70,6 +71,7 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
             case HTTPCommands.GetAllSentRequest:        { return await Axios.get    (this.CreateURL(Command,ID), body);}
             case HTTPCommands.ManageChangeRequest:      { return await Axios.patch  (this.CreateURL(Command,ID), body);}
             case HTTPCommands.ManagerGetAllRequest:     { return await Axios.get    (this.CreateURL(Command,ID), body);}
+            case HTTPCommands.AdminCreateProfile:       { return await Axios.post   (this.CreateURL(Command,ID), body);}
             case HTTPCommands.AdminGetAllEmployees:     { return await Axios.get    (this.CreateURL(Command,ID), body);}
             case HTTPCommands.AdminAssignManager:       { return await Axios.patch  (this.CreateURL(Command,ID), body);}
             case HTTPCommands.AdminRemoveEmployee:      { return await Axios.patch  (this.CreateURL(Command,ID), body);}
@@ -136,19 +138,34 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
     }
     
     async AdminGetAllEmployees():Promise<TransferProfileArray>{
-        throw new Error("Method not implemented.");
+        const Command:HTTPCommands=  HTTPCommands.AdminGetAllEmployees;
+        const body={AuthenticationString: (this.AuthenticationString)};
+        const ReturnProfileArray:TransferProfileArray= (await this.CreateHTTPRequest(Command, body, this.UserID)).data;
+        return ReturnProfileArray;
     }
     async AdminAssignManager(EmployeeID:string, ManagerID:string):Promise<ResultReturnCheck>{
-        throw new Error("Method not implemented.");
+        const Command:HTTPCommands=  HTTPCommands.AdminAssignManager;
+        const body={EmployeeID, ManagerID,AuthenticationString: (this.AuthenticationString)};
+        const ReturnResultCheck:ResultReturnCheck= (await this.CreateHTTPRequest(Command, body, this.UserID)).data;
+        return ReturnResultCheck;
     }
     async AdminRemoveEmployeeAssignment(EmployeeID:string, ManagerID:string, AdminID:string):Promise<ResultReturnCheck> {
-        throw new Error("Method not implemented.");
+        const Command:HTTPCommands=  HTTPCommands.AdminRemoveEmployee;
+        const body={EmployeeID, ManagerID,AuthenticationString: (this.AuthenticationString)};
+        const ReturnResultCheck:ResultReturnCheck= (await this.CreateHTTPRequest(Command, body, this.UserID)).data;
+        return ReturnResultCheck;
     }
     async AdminDeleteProfile(EmployeeID:string):Promise<ResultReturnCheck>  {
-        throw new Error("Method not implemented.");
+        const Command:HTTPCommands=  HTTPCommands.AdminDeleteProfile;
+        const body={EmployeeID,AuthenticationString: (this.AuthenticationString)};
+        const ReturnResultCheck:ResultReturnCheck= (await this.CreateHTTPRequest(Command, body, this.UserID)).data;
+        return ReturnResultCheck;
     }
-    AdminCreateProfile(ProfileInit: HTTPCreateProfile, ManagerID: string): Promise<TransferProfile> {
-        throw new Error("Method not implemented.");
+    async AdminCreateProfile(ProfileInit: HTTPCreateProfile, ManagerID: string): Promise<TransferProfile> {
+        const Command:HTTPCommands=  HTTPCommands.AdminCreateProfile;
+        const body={ProfileInit,ManagerID,AuthenticationString: (this.AuthenticationString)};
+        const ReturnProfile:TransferProfile= (await this.CreateHTTPRequest(Command, body, this.UserID)).data;
+        return ReturnProfile;
     }
     // Manager functions==================================================================
     async ManagerChangeRequest(ManagerID:string, RequestID:string, Type:RequestStatus, Message:string):Promise<TransferRequest> {
@@ -179,7 +196,6 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
         const Command:HTTPCommands=  HTTPCommands.CreateProfile ;
         const body:HTTPCreateProfile = {... ProfileInit} ; 
         const LoginFound:LoginReturn = (await this.CreateHTTPRequest(Command, body, this.UserID)).data;
-        console.log( "Profile Creation return JSON: ",JSON.stringify(LoginFound.ReturnProfile.id));
         this.UserID = LoginFound.ReturnProfile.id ?? ''
         this.AuthenticationString = LoginFound.AuthenticationString?? ''
         return LoginFound;
