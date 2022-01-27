@@ -16,10 +16,8 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
     private TargetURL: string;
     private AuthenticationString:string ='';
     private UserID:string = '';
-    private UsePort:boolean;
-    constructor(InputURL:string, InitUsePort:boolean,InputPortNumber:number=3001){
+    constructor(InputURL:string,InputPortNumber:number=3001){
         this.PortNumber = InputPortNumber ?? 3001 ;
-        this.UsePort=InitUsePort;
         if(InputURL?.length>1) {this.TargetURL =  InputURL}
         else{this.TargetURL = 'http://localhost'}
     }
@@ -32,7 +30,7 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
             case HTTPCommands.ChangeFirstName:          { return `/Profile/${ID}/ChangeFirst`;}
             case HTTPCommands.ChangeLastName:           { return `/Profile/${ID}/ChangeLast`;}
             case HTTPCommands.ChangePassword:           { return `/Profile/${ID}/ChangePassword`;}
-            case HTTPCommands.GetManageName:            { return `/Profile/${ID}/Manager`;}
+            case HTTPCommands.GetManageName:            { return `/Profile/${ID}`;}
             case HTTPCommands.MakeRequest:              { return `/Request/${ID}`;}
             case HTTPCommands.DeleteRequest:            { return `/Request/${ID}`;}
             case HTTPCommands.GetAllSentRequest:        { return `/Request/${ID}`;}
@@ -50,7 +48,7 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
         }
     }
     private constructURLPrefect(){
-        if(this.UsePort){ return `${this.TargetURL}:${this.PortNumber}`}
+        if(this.PortNumber>0){ return `${this.TargetURL}:${this.PortNumber}`}
         else{ return `${this.TargetURL}`}
     }
     private CreateURL(Command:HTTPCommands,ID:string):string{
@@ -224,8 +222,8 @@ export default class  HTTPRequestHandler implements ProfileHTTPCInterface, Manag
     /**Use to get manager name*/
     async GetManagerName(ManagerID:string):Promise<ResultReturnString> {
         const Command:HTTPCommands=  HTTPCommands.GetManageName;
-        const body:ResultReturnStringID = {ReturnString: ManagerID, AuthenticationString: (this.AuthenticationString) }
-        const ResultReturnString:ResultReturnString = (await this.CreateHTTPRequest(Command, body, this.UserID)).data;
+        const body={}
+        const ResultReturnString:ResultReturnString = (await this.CreateHTTPRequest(Command, body, `${this.UserID}/Manager/${ManagerID}`)).data;
         return ResultReturnString;
     }
     async MakeRequest(EmployeeID:string, Amount:number, Message:string):Promise<TransferRequest> {
